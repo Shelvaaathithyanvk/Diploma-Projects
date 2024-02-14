@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+struct Scoreboard {
+    int score;
+    int wickets;
+    float overs;
+};
+
+void displayScoreboard(struct Scoreboard board) {
+    printf("Current Score: %d/%d\n", board.score, board.wickets);
+    printf("Overs: %.1f\n", board.overs);
+}
+
+int main() {
+    struct Scoreboard board = {0, 0, 0.0};
+    int runs, choice;
+
+    printf("Welcome to Cricket Scoreboard\n");
+
+    do {
+        printf("\n1. Add Runs\n");
+        printf("2. Add Wicket\n");
+        printf("3. Display Scoreboard\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter runs scored in this ball: ");
+                scanf("%d", &runs);
+                board.score += runs;
+                board.overs += 0.1; // Assuming each ball adds 0.1 overs
+                break;
+            case 2:
+                printf("Wicket fell!\n");
+                board.wickets++;
+                board.overs += 0.1; // Assuming each ball adds 0.1 overs
+                break;
+            case 3:
+                displayScoreboard(board);
+                break;
+            case 4:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a valid option.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
